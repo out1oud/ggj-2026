@@ -5970,7 +5970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.3764706}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.4745098}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9471,7 +9471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 764698931092612204, guid: 94a9a5b1395669642bc5f91d5edb1389, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -64.9
+      value: -64.900024
       objectReference: {fileID: 0}
     - target: {fileID: 1599415820900812629, guid: 94a9a5b1395669642bc5f91d5edb1389, type: 3}
       propertyPath: m_Name
