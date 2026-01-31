@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 569976972}
   - component: {fileID: 569976974}
   m_Layer: 5
-  m_Name: Dialog
+  m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -647,8 +647,10 @@ GameObject:
   - component: {fileID: 705881371}
   - component: {fileID: 705881370}
   - component: {fileID: 705881369}
+  - component: {fileID: 705881374}
+  - component: {fileID: 705881373}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Dialogues
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -738,6 +740,65 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &705881373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705881368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab11f37adaf540599e105b36a57dec1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem.DialoguePresenter
+  isPersistent: 0
+  ui: {fileID: 705881374}
+  textHideDuration: 10
+  textHideCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.0049261088
+      outSlope: 0.0049261088
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.48333332
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2.7577722
+      outSlope: 2.7577722
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.065222204
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pauseMin: 1
+  pauseMax: 10
+  useUnscaledTimeForPause: 1
+--- !u!114 &705881374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705881368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0acc53a945d4899aca4bdf6e5bed42b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem.DialogueUIController
+  textPanel: {fileID: 569976974}
+  textLabel: {fileID: 1979731882}
+  answersPanel: {fileID: 633034726}
+  answersContainer: {fileID: 633034724}
+  answerButtonPrefab: {fileID: 8963061567457750412, guid: cf4e3242455ee4c4888b3053e06d6931, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1741108964}
   - component: {fileID: 1741108963}
+  - component: {fileID: 1741108965}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -832,6 +894,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1741108965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741108962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e446cb0dba4834a63cfbd975936d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player.GameplayController
+  isPersistent: 0
+  startingDialogue: {fileID: 11400000, guid: f6db727c7b01e6144972a12a17d1b013, type: 2}
 --- !u!1 &1979731880
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +966,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hey! Name's <link=crow.name>Crow</link>.
+  m_text: Dialog Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

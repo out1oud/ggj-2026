@@ -20,19 +20,47 @@ namespace UI
         const string HoverStyle = "link_hover";
         const string DisabledStyle = "link_activated";
 
+        bool _processing;
+        bool _ignoreTextChanged;
+
         void Start()
         {
             _text = GetComponent<TMP_Text>();
-            _baseText = _text.text;
-            
-            _baseText = ApplyNormalStyleToAllLinks(
-                _text.text,
-                NormalStyle
-            );
+            EnrichText();
+        }
 
+        void OnEnable()
+        {
+            TMPro_EventManager.TEXT_CHANGED_EVENT.Add(OnTextChanged);
+        }
+
+        void OnDisable()
+        {
+            TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(OnTextChanged);
+        }
+
+        void OnTextChanged(Object obj)
+        {
+            if (_processing || _ignoreTextChanged || obj != _text)
+                return;
+
+            _processing = true;
+            EnrichText();
+            _processing = false;
+        }
+
+        void EnrichText()
+        {
+            _hoveredLinkId = null;
+
+            string source = _text.text;
+
+            _baseText = ApplyNormalStyleToAllLinks(source, NormalStyle);
+
+            _ignoreTextChanged = true;
             _text.text = _baseText;
-            
             _text.ForceMeshUpdate();
+            _ignoreTextChanged = false;
         }
 
         public void OnPointerMove(PointerEventData eventData)
@@ -56,13 +84,12 @@ namespace UI
 
             _hoveredLinkId = linkId;
 
-            _text.text = ApplyStyleToLink(
-                _baseText,
-                linkId,
-                HoverStyle
-            );
+            string hoveredText = ApplyStyleToLink(_baseText, linkId, HoverStyle, NormalStyle);
 
+            _ignoreTextChanged = true;
+            _text.text = hoveredText;
             _text.ForceMeshUpdate();
+            _ignoreTextChanged = false;
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -76,8 +103,11 @@ namespace UI
                 return;
 
             _hoveredLinkId = null;
+
+            _ignoreTextChanged = true;
             _text.text = _baseText;
             _text.ForceMeshUpdate();
+            _ignoreTextChanged = false;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -94,16 +124,16 @@ namespace UI
             CluesCollector.Instance.AddClue(id);
 
             _baseText = DisableLink(_baseText, id, DisabledStyle);
-            _text.text = _baseText;
+
             _hoveredLinkId = null;
 
+            _ignoreTextChanged = true;
+            _text.text = _baseText;
             _text.ForceMeshUpdate();
+            _ignoreTextChanged = false;
         }
-        
-        static string ApplyNormalStyleToAllLinks(
-            string sourceText,
-            string normalStyle
-        )
+
+        static string ApplyNormalStyleToAllLinks(string sourceText, string normalStyle)
         {
             if (string.IsNullOrEmpty(sourceText) || string.IsNullOrEmpty(normalStyle))
                 return sourceText;
@@ -117,7 +147,6 @@ namespace UI
             {
                 string inner = match.Groups["inner"].Value;
 
-                // Если стиль уже есть — не трогаем
                 if (Regex.IsMatch(inner, @"<style\s*="))
                     return match.Value;
 
@@ -126,12 +155,7 @@ namespace UI
             });
         }
 
-        static string ApplyStyleToLink(
-            string sourceText,
-            string linkId,
-            string newStyle,
-            string defaultStyle = null
-        )
+        static string ApplyStyleToLink(string sourceText, string linkId, string newStyle, string defaultStyle = null)
         {
             if (string.IsNullOrEmpty(sourceText) || string.IsNullOrEmpty(linkId))
                 return sourceText;
@@ -150,18 +174,25 @@ namespace UI
                 inner = Regex.Replace(inner, @"<style\s*=.*?>", "");
                 inner = Regex.Replace(inner, @"</style>", "");
 
-                inner = !string.IsNullOrEmpty(defaultStyle) ? $"<style={defaultStyle}>{inner}</style>" : $"<style={newStyle}>{inner}</style>";
+                if (string.IsNullOrEmpty(newStyle))
+                {
+                    if (!string.IsNullOrEmpty(defaultStyle))
+                        inner = $"<style={defaultStyle}>{inner}</style>";
+                }
+                else
+                {
+                    inner = $"<style={newStyle}>{inner}</style>";
+                }
 
                 return $"<link={linkId}>{inner}</link>";
             }, 1);
         }
 
-        static string DisableLink(
-            string sourceText,
-            string linkId,
-            string disabledStyle
-        )
+        static string DisableLink(string sourceText, string linkId, string disabledStyle)
         {
+            if (string.IsNullOrEmpty(sourceText) || string.IsNullOrEmpty(linkId))
+                return sourceText;
+
             string escapedId = Regex.Escape(linkId);
 
             var linkRegex = new Regex(
@@ -172,8 +203,10 @@ namespace UI
             return linkRegex.Replace(sourceText, match =>
             {
                 string inner = match.Groups["inner"].Value;
+
                 inner = Regex.Replace(inner, @"<style\s*=.*?>", "");
                 inner = Regex.Replace(inner, @"</style>", "");
+
                 return $"<style={disabledStyle}>{inner}</style>";
             }, 1);
         }
