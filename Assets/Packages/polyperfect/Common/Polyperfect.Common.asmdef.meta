@@ -9,6 +9,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 54733
   packageName: Low Poly Ultimate Pack
-  packageVersion: 9.5
-  assetPath: Assets/Packages/polyperfect/Common/Polyperfect.Common.asmdef
-  uploadId: 768695
+  packageVersion: 10.0
+  assetPath: Assets/polyperfect/Common/Polyperfect.Common.asmdef
+  uploadId: 805410
