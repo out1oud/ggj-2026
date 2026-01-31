@@ -1,3 +1,4 @@
+using Round;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utilities;
@@ -7,21 +8,18 @@ namespace Player
     [RequireComponent(typeof(PlayerInput))]
     public class QuickInputActions : MonoBehaviour
     {
-        [SerializeField] float forwardDirection = 1f;
-        [SerializeField] MovementController movementController;
-        
         void OnAccelerate(InputValue value)
         {
             Debug.Log("Accelerate");
             if (!value.isPressed) return;
-            movementController.StartMove(forwardDirection);
+            RoundController.Instance.StartMove();
         }
 
         void OnHalt(InputValue value)
         {
             Debug.Log("Stop");
             if (!value.isPressed) return;
-            movementController.StopMoveSmooth();
+            RoundController.Instance.StopMove();
         }
     }
 }
