@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90239f0d8c64c52954adec4cbd1d50e, type: 3}
+  m_Name: Crow Dialogue
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem.CharacterDialogue
+  characterId: crow
+  characterName: Crow
+  nodes:
+  - id: crow.start
+    targetId: crow.long_night
+    actionType: 0
+    actionValue: 0
+    text: Hey! Name's <link=crow.name><style=link>Crow</style></link>.
+    answers: []
+    shouldPause: 1
+  - id: crow.long_night
+    targetId: crow.pause
+    actionType: 0
+    actionValue: 0
+    text: Long night, huh?
+    answers:
+    - id: crow.long_night.what
+      targetId: crow.business
+      text: What makes you say that?
+      shouldPause: 0
+    - id: crow.long_night.not
+      targetId: crow.business
+      text: Not really...
+      shouldPause: 1
+    shouldPause: 0
+  - id: crow.business
+    targetId: crow.pause
+    actionType: 0
+    actionValue: 0
+    text: Just... many <link=crow.things><style=link>things</style></link> to do.
+    answers: []
+    shouldPause: 1
