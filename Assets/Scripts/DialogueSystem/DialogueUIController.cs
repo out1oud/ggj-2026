@@ -24,6 +24,11 @@ namespace DialogueSystem
             HideAnswersInstant();
         }
 
+        public void SetStyleSheet(TMP_StyleSheet styleSheet)
+        {
+            textLabel.styleSheet = styleSheet;
+        }
+
         public void ShowText(string text)
         {
             StopFade();

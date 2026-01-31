@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem.CharacterDialogue
   characterId: crow
   characterName: Crow
+  styleSheet: {fileID: 11400000, guid: 07711bb557e7e9d469e4127f0520c535, type: 2}
   nodes:
   - id: crow.start
     targetId: crow.long_night
     actionType: 0
     actionValue: 0
-    text: Hey! Name's <link=crow.name><style=link>Crow</style></link>.
+    text: Hey! Name's <link=crow.name>Edward</link>.
     answers: []
     shouldPause: 1
   - id: crow.long_night
@@ -41,6 +42,6 @@ MonoBehaviour:
     targetId: crow.pause
     actionType: 0
     actionValue: 0
-    text: Just... many <link=crow.things><style=link>things</style></link> to do.
+    text: Just... many <link=crow.thing>things</link> to do.
     answers: []
     shouldPause: 1

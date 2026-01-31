@@ -32,6 +32,8 @@ namespace DialogueSystem
                 Debug.LogWarning("DialoguePresenter: dialogue is null");
                 return;
             }
+            
+            ui.SetStyleSheet(dialogue.styleSheet);
 
             _runner = new()
             {
