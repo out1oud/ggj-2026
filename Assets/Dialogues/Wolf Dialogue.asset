@@ -15,4 +15,77 @@ MonoBehaviour:
   characterId: 
   characterName: 
   styleSheet: {fileID: 0}
-  nodes: []
+  nodes:
+  - id: Wolf.start
+    targetId: Wolf.1
+    actionType: 0
+    actionValue: 0
+    text: "This <link=wolf.clue1>mayor</link> of ours sure is something, ay? Have
+      you seen his last speech? He thinks this bullshit will help him to get reelected
+      this month. Well, we\u2019ll see about that, ay?"
+    answers: []
+    shouldPause: 0
+  - id: Wolf.1
+    targetId: Wolf.2
+    actionType: 0
+    actionValue: 0
+    text: "Every time he opens his bloody mouth it\u2019s always \u201CWe shall stamp
+      out this\u201D or \u201CWe will fight head on against that\u201D. "
+    answers: []
+    shouldPause: 0
+  - id: Wolf.2
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: "Why wouldn\u2019t he say something nice? Or hell, something cute? Might
+      be funny, ay?"
+    answers:
+    - id: 
+      targetId: Wolf.4
+      text: '- Like what?'
+      shouldPause: 0
+    - id: 
+      targetId: Wolf.3
+      text: ...
+      shouldPause: 0
+    shouldPause: 0
+  - id: Wolf.3
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: This is me, thanks!
+    answers: []
+    shouldPause: 0
+  - id: Wolf.4
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: "Like \u201Ctoodles\u201D, instead of \u201Cgoodbye\u201D? Whatever. Nothing
+      cute, nice, or even useful could ever be found in that gigantic house of his.
+      Well, almost\u2026"
+    answers:
+    - id: 
+      targetId: Wolf.5
+      text: So would you like such a gigantic house for yourself?
+      shouldPause: 0
+    shouldPause: 0
+  - id: Wolf.5
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: "Me? No, I\u2019m terrified of heights, I can barely look down when I'm
+      riding on a double-decker. Would never choose to live in a house like that.
+      But I\u2019ve seen his. I\u2019ve been in."
+    answers:
+    - id: 
+      targetId: Wolf.6
+      text: Been in?
+      shouldPause: 0
+    shouldPause: 0
+  - id: Wolf.6
+    targetId: Wolf.3
+    actionType: 0
+    actionValue: 0
+    text: "Haha, that\u2019s right, your man has been places!"
+    answers: []
+    shouldPause: 0
