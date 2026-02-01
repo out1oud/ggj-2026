@@ -74,7 +74,7 @@ MonoBehaviour:
     actionType: 0
     actionValue: 0
     text: 'Oh, but they were sloppy - a mark of an unorganised man, a weak man. <link=bull.clue4>Scratches
-      on the window sill</link.> Saw them myself, yes. '
+      on the window sill</link>. Saw them myself, yes. '
     answers:
     - id: 
       targetId: Bull.6

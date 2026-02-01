@@ -42,7 +42,7 @@ MonoBehaviour:
     answers:
     - id: 
       targetId: Wolf.4
-      text: '- Like what?'
+      text: 'Like what?'
       shouldPause: 0
     - id: 
       targetId: Wolf.3
