@@ -51,10 +51,38 @@ MonoBehaviour:
       to just starin\u2019 out my golden cage. "
     answers: []
     shouldPause: 0
-  - id: sheep.next4
-    targetId: sheep.next5
+  - id: sheep.next5
+    targetId: 
     actionType: 0
     actionValue: 0
-    text: 
+    text: "Ah, my sweet, sometimes im lookin\u2019 down from there and think of fallin
+      out. They say you can survive a two storey fall, but how can one know for sure?
+      I think I wouldn\u2019t survive."
+    answers:
+    - id: 
+      targetId: sheep.next7
+      text: we arrived, mam
+      shouldPause: 0
+    - id: 
+      targetId: sheep.next6
+      text: ...
+      shouldPause: 0
+    shouldPause: 0
+  - id: sheep.next6
+    targetId: sheep.next7
+    actionType: 0
+    actionValue: 0
+    text: "Oh, look at me, tearin\u2019 up over the phone, like some common mimsy.
+      You said you would be sendin\u2019 your famous eclairs to mine? I\u2019ll be
+      looking forward to that then! Ah, shugar is goin\u2019 to absolutely ruin my
+      figure, but there is no resistin\u2019 your bakin\u2019!"
+    answers: []
+    shouldPause: 0
+  - id: sheep.next7
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: "I have arrived, I have to go. Yes, I\u2019ll talk to you later. Toodles!
+      *puts phone away*"
     answers: []
     shouldPause: 0

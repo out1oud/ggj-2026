@@ -24,7 +24,7 @@ MonoBehaviour:
     answers:
     - id: 
       targetId: crow.2
-      text: -What?
+      text: What?
       shouldPause: 0
     - id: 
       targetId: crow.2
@@ -35,7 +35,7 @@ MonoBehaviour:
     targetId: 
     actionType: 0
     actionValue: 0
-    text: -What are you looking at me like this for?
+    text: What are you looking at me like this for?
     answers:
     - id: 
       targetId: crow.3
@@ -93,7 +93,7 @@ MonoBehaviour:
     answers:
     - id: 
       targetId: crow.8
-      text: -Do you often leave marks?
+      text: Do you often leave marks?
       shouldPause: 0
     - id: 
       targetId: crow.9
