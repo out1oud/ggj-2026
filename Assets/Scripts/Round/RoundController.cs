@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using Character;
 using DialogueSystem;
 using Player;
+using TrafficLight;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
@@ -83,6 +85,21 @@ namespace Round
         int _dialogueIndex;
 
         Coroutine _flow;
+        Coroutine _trafficLightCoroutine;
+        
+        // Traffic light handling - uses separate flags to avoid state machine conflicts
+        TrafficLightController _currentTrafficLight;
+        Action _trafficLightCallback;
+        bool _trafficLightBrakePressed;
+        bool _trafficLightActive;
+        
+        enum TrafficLightPhase { None, WaitingForBrake, WaitingForStop, WaitingForGo }
+        TrafficLightPhase _trafficLightPhase = TrafficLightPhase.None;
+        
+        /// <summary>
+        /// Returns true if currently handling a traffic light sequence.
+        /// </summary>
+        public bool IsHandlingTrafficLight => _trafficLightActive;
 
         void Start()
         {
@@ -92,6 +109,20 @@ namespace Round
 
         public void StartMove()
         {
+            Log($"StartMove called. Current state: {_state}, TrafficLightPhase: {_trafficLightPhase}");
+            
+            // Traffic light takes priority
+            if (_trafficLightActive && _trafficLightPhase == TrafficLightPhase.WaitingForGo)
+            {
+                // Player pressed forward at traffic light after stopping
+                _trafficLightPhase = TrafficLightPhase.None;
+                movementController.StartMove();
+                qte.HideForward();
+                Log("Traffic light: Forward pressed, resuming movement");
+                FinishTrafficLightSequence(ranRedLight: false);
+                return;
+            }
+            
             switch (_state)
             {
                 case State.WaitingForEngineStart:
@@ -99,23 +130,163 @@ namespace Round
                     qte.HideForward();
                     StartEngineSound();
                     _state = State.WaitingInitialTripDelay;
+                    Log("Engine started, moving");
                     break;
                 case State.WaitingForStartAfterEntry:
                     movementController.StartMove();
                     qte.HideForward();
                     StartEngineSound();
                     _state = State.PauseBeforeNodes;
+                    Log("Started moving after passenger entry");
+                    break;
+                default:
+                    Log($"StartMove ignored - state {_state} doesn't accept forward input");
                     break;
             }
         }
 
         public void StopMove()
         {
+            Log($"StopMove called. Current state: {_state}, TrafficLightPhase: {_trafficLightPhase}");
+            
+            // Traffic light takes priority
+            if (_trafficLightActive && _trafficLightPhase == TrafficLightPhase.WaitingForBrake)
+            {
+                // Player pressed brake at traffic light
+                _trafficLightBrakePressed = true;
+                _trafficLightPhase = TrafficLightPhase.WaitingForStop;
+                movementController.StopMoveSmooth();
+                qte.ResolveBreak(hide: true);
+                Log("Traffic light: Brake pressed, waiting for stop");
+                return;
+            }
+            
             if (_state == State.PromptStopForDropoff)
             {
                 movementController.StopMoveSmooth();
                 _state = State.WaitingStopForDropoff;
+                Log("Dropoff: Brake pressed, waiting for stop");
             }
+            else
+            {
+                Log($"StopMove ignored - not in a state that accepts brake input");
+            }
+        }
+
+        /// <summary>
+        /// Called by TrafficLightTrigger when player enters a red light zone.
+        /// </summary>
+        public void HandleTrafficLightRed(TrafficLightController trafficLight, float brakeTimerDuration, Action onComplete)
+        {
+            if (IsHandlingTrafficLight)
+            {
+                Log("Already handling a traffic light, ignoring");
+                return;
+            }
+
+            _currentTrafficLight = trafficLight;
+            _trafficLightCallback = onComplete;
+            _trafficLightBrakePressed = false;
+            _trafficLightActive = true;
+            _trafficLightPhase = TrafficLightPhase.WaitingForBrake;
+
+            // Pause the traffic light cycle
+            trafficLight.PauseCycle();
+            Log($"Traffic light red detected, pausing cycle. Phase: WaitingForBrake. Timer: {brakeTimerDuration}s");
+
+            // Start the traffic light handling coroutine
+            if (_trafficLightCoroutine != null)
+                StopCoroutine(_trafficLightCoroutine);
+            
+            _trafficLightCoroutine = StartCoroutine(TrafficLightSequence(brakeTimerDuration));
+        }
+
+        IEnumerator TrafficLightSequence(float brakeTimerDuration)
+        {
+            // Show brake prompt with timer
+            qte.ShowBreakWithTimer(brakeTimerDuration, autoHide: false, onTimerEnd: () =>
+            {
+                // Timer expired without braking - player ran the red light
+                if (_trafficLightActive && _trafficLightPhase == TrafficLightPhase.WaitingForBrake && !_trafficLightBrakePressed)
+                {
+                    Log("Traffic light: Timer expired - ran red light!");
+                    // Could add penalty here
+                    qte.HideBreak();
+                    FinishTrafficLightSequence(ranRedLight: true);
+                }
+            });
+
+            Log("Traffic light: Showing brake prompt with timer");
+
+            // Wait for brake to be pressed or timer to expire
+            while (_trafficLightActive && _trafficLightPhase == TrafficLightPhase.WaitingForBrake)
+                yield return null;
+
+            // If brake was pressed, wait for full stop
+            if (_trafficLightActive && _trafficLightPhase == TrafficLightPhase.WaitingForStop)
+            {
+                while (movementController.IsMoving)
+                    yield return null;
+
+                Log("Traffic light: Stopped, waiting before switching to green");
+                
+                // Short pause after stopping
+                yield return new WaitForSeconds(0.8f);
+                
+                // Switch light to green
+                if (_currentTrafficLight != null)
+                {
+                    _currentTrafficLight.ForceGreen(resumeCycle: false);
+                    Log("Traffic light: Switched to green");
+                }
+                
+                // Now show forward prompt and wait for player to go
+                _trafficLightPhase = TrafficLightPhase.WaitingForGo;
+                qte.ShowForward();
+                Log("Traffic light: Showing forward prompt");
+
+                // Wait for forward press (handled in StartMove)
+                while (_trafficLightActive && _trafficLightPhase == TrafficLightPhase.WaitingForGo)
+                    yield return null;
+            }
+        }
+
+        void FinishTrafficLightSequence(bool ranRedLight = false)
+        {
+            if (_currentTrafficLight != null)
+            {
+                if (ranRedLight)
+                {
+                    // Ran red light - switch to green anyway
+                    _currentTrafficLight.ForceGreen(resumeCycle: true);
+                    Log("Traffic light: Ran red light, switching to green and resuming cycle");
+                }
+                else
+                {
+                    // Stopped correctly - just resume cycle (already green)
+                    _currentTrafficLight.ResumeCycle();
+                    Log("Traffic light: Resuming cycle");
+                }
+            }
+
+            // Record stats in GameplayController
+            if (GameplayController.Instance != null)
+            {
+                if (ranRedLight)
+                    GameplayController.Instance.RecordTrafficLightFailure();
+                else
+                    GameplayController.Instance.RecordTrafficLightSuccess();
+            }
+
+            // Clear traffic light state
+            _trafficLightActive = false;
+            _trafficLightPhase = TrafficLightPhase.None;
+            _currentTrafficLight = null;
+
+            // Invoke callback
+            _trafficLightCallback?.Invoke();
+            _trafficLightCallback = null;
+            _trafficLightCoroutine = null;
         }
 
         IEnumerator Flow()
