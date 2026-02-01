@@ -44,18 +44,14 @@ namespace Round
         [Header("Input")] [SerializeField] KeyCode driveKey = KeyCode.W;
         [SerializeField] KeyCode stopKey = KeyCode.S;
 
-        [Header("Dependencies")] [SerializeField]
-        MonoBehaviour taxiDriveBehaviour;
-
-        [SerializeField] MonoBehaviour characterServiceBehaviour; // ICharacterService
-        [SerializeField] MonoBehaviour dialogueRunnerBehaviour; // IDialogueRunner
-        [SerializeField] MovementController movementController;
+        [Header("Dependencies")] [SerializeField] MovementController movementController;
         [SerializeField] CharacterActor characterActor;
+        [SerializeField] QteController qte;
 
         [Header("UI Hooks (optional)")] [SerializeField]
         bool showDebugLogs = true;
 
-        [Header("Results")] [SerializeField] string resultsSceneName = "Results"; // или вызов твоего UI
+        [Header("Results")] [SerializeField] string resultsSceneName = "Results";
 
         State _state = State.WaitingForEngineStart;
         int _dialogueIndex;
@@ -64,12 +60,18 @@ namespace Round
 
         void Start()
         {
+            qte.ShowForward();
             _flow = StartCoroutine(Flow());
         }
 
         public void StartMove()
         {
-            if (_state == State.WaitingForEngineStart) movementController.StartMove();
+            if (_state != State.WaitingForEngineStart) return;
+            
+            movementController.StartMove();
+            qte.HideForward();
+            
+            _state = State.WaitingInitialTripDelay;
         }
 
         public void StopMove()
@@ -94,11 +96,13 @@ namespace Round
                 movementController.StopMoveSmooth();
                 _state = State.WaitingStoppedAtPickup;
 
-                while (!movementController) yield return null;
+                while (movementController.IsMoving) yield return null;
 
                 _state = State.PassengerEntering;
+                
                 characterActor.SetCharacter(cd.characterId);
                 characterActor.Enter();
+                
                 yield return WaitRandom(passengerEnterAnimWaitRange);
 
                 _state = State.PauseBeforeNodes;

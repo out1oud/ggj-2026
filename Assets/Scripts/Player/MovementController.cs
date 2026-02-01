@@ -6,8 +6,6 @@ namespace Player
     [RequireComponent(typeof(Rigidbody))]
     public class MovementController : MonoBehaviour
     {
-        static readonly int Moving = Animator.StringToHash("Moving");
-        
         [Header("Speed")] [SerializeField] float maxSpeed = 6f;
         [SerializeField] float acceleration = 18f;
         [SerializeField] float deceleration = 24f;

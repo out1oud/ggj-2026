@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TrafficLight
 {
     public class TrafficLightController : MonoBehaviour
     {
-        public GameObject redLight;
-        public GameObject redLightBottom;
-        public GameObject yellowLight;
-        public GameObject yellowLightBottom;
-        public GameObject greenLight;
-        public GameObject greenLightBottom;
-        public GameObject greenLightPedestrian;
-        public GameObject redLightPedestrian;
+        public List<GameObject> redLights;
+        public List<GameObject> yellowLights;
+        public List<GameObject> greenLights;
 
         [Header("Timings (seconds)")]
         public float redTime = 5f;
@@ -64,15 +60,10 @@ namespace TrafficLight
         void SetState(LightState newState)
         {
             _currentState = newState;
-
-            redLight.SetActive(newState == LightState.Red);
-            redLightBottom.SetActive(newState == LightState.Red);
-            greenLightPedestrian.SetActive(newState == LightState.Red);
-            yellowLight.SetActive(newState == LightState.Yellow);
-            yellowLightBottom.SetActive(newState == LightState.Yellow);
-            greenLight.SetActive(newState == LightState.Green);
-            greenLightBottom.SetActive(newState == LightState.Green);
-            redLightPedestrian.SetActive(newState == LightState.Green);
+            
+            redLights.ForEach(x => x.SetActive(newState == LightState.Red));
+            yellowLights.ForEach(x => x.SetActive(newState == LightState.Yellow));
+            greenLights.ForEach(x => x.SetActive(newState == LightState.Green));
         }
     }
 }
