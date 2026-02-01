@@ -23,8 +23,16 @@ namespace TrafficLight
         public float greenTime = 5f;
         public float yellowTime = 2f;
 
+        [Header("Initialization")]
+        [Tooltip("Randomize the starting state of the traffic light")]
+        public bool randomizeInitialState = true;
+        
+        [Tooltip("Randomize how far into the current phase the light starts (0-1)")]
+        public bool randomizePhaseOffset = true;
+
         LightState _currentState;
         bool _isPaused;
+        float _initialPhaseOffset;
         Coroutine _trafficLoopCoroutine;
 
         /// <summary>
@@ -44,12 +52,26 @@ namespace TrafficLight
 
         void Start()
         {
-            SetState(LightState.Red);
+            // Randomize initial state
+            LightState initialState = LightState.Red;
+            if (randomizeInitialState)
+            {
+                var states = (LightState[])Enum.GetValues(typeof(LightState));
+                initialState = states[UnityEngine.Random.Range(0, states.Length)];
+            }
+            
+            // Randomize phase offset (0-1 means how far into current phase)
+            _initialPhaseOffset = randomizePhaseOffset ? UnityEngine.Random.value : 0f;
+            
+            SetState(initialState);
             _trafficLoopCoroutine = StartCoroutine(TrafficLoop());
         }
 
         IEnumerator TrafficLoop()
         {
+            // Apply initial phase offset on first iteration
+            bool firstIteration = true;
+            
             while (true)
             {
                 // Wait while paused
@@ -59,22 +81,27 @@ namespace TrafficLight
                 switch (_currentState)
                 {
                     case LightState.Red:
-                        yield return new WaitForSeconds(redTime);
+                        float redWait = firstIteration ? redTime * (1f - _initialPhaseOffset) : redTime;
+                        yield return new WaitForSeconds(redWait);
                         if (!_isPaused) SetState(LightState.Green);
                         break;
 
                     case LightState.Green:
-                        yield return new WaitForSeconds(greenTime);
+                        float greenWait = firstIteration ? greenTime * (1f - _initialPhaseOffset) : greenTime;
+                        yield return new WaitForSeconds(greenWait);
                         if (!_isPaused) SetState(LightState.Yellow);
                         break;
 
                     case LightState.Yellow:
-                        yield return new WaitForSeconds(yellowTime);
+                        float yellowWait = firstIteration ? yellowTime * (1f - _initialPhaseOffset) : yellowTime;
+                        yield return new WaitForSeconds(yellowWait);
                         if (!_isPaused) SetState(LightState.Red);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
+                
+                firstIteration = false;
             }
         }
 
