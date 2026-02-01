@@ -20,7 +20,7 @@ MonoBehaviour:
     targetId: Bull.1
     actionType: 0
     actionValue: 0
-    text: I would like to <link=bull.clue1>employ your services</link>, officer.
+    text: I would like to <link=bull.clue1>employ</link> your services, <link=bull.clue1a>officer</link>.
       Sensitive information is involved, so I believe we understand each other and
       this will be handled with a certain discretion.
     answers: []
@@ -74,7 +74,7 @@ MonoBehaviour:
     actionType: 0
     actionValue: 0
     text: 'Oh, but they were sloppy - a mark of an unorganised man, a weak man. <link=bull.clue4>Scratches
-      on the window cill.</link> Saw them myself, yes. '
+      on the window sill</link.> Saw them myself, yes. '
     answers:
     - id: 
       targetId: Bull.6

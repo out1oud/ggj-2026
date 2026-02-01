@@ -13,10 +13,6 @@ namespace TrafficLight
         [Header("Player Detection")]
         [SerializeField] string playerTag = "Player";
 
-        [Header("Timer Settings")]
-        [Tooltip("Time in seconds for the brake prompt timer")]
-        [SerializeField] float brakeTimerDuration = 3f;
-
         [Header("Debug")]
         [SerializeField] bool showDebugLogs = true;
 
@@ -76,7 +72,7 @@ namespace TrafficLight
                 // Notify RoundController to handle the traffic light stop sequence
                 if (RoundController.Instance != null)
                 {
-                    RoundController.Instance.HandleTrafficLightRed(trafficLightController, brakeTimerDuration, OnSequenceComplete);
+                    RoundController.Instance.HandleTrafficLightRed(trafficLightController, OnSequenceComplete);
                 }
                 else
                 {

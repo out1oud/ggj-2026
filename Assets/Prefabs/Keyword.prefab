@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 4530897410220114602}
   - component: {fileID: 5445599453415711097}
   - component: {fileID: 7523255543008402362}
-  - component: {fileID: 3275197185338332866}
+  - component: {fileID: 1993479515079452317}
   m_Layer: 5
   m_Name: Keyword
   m_TagString: Untagged
@@ -175,7 +175,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4530897410220114602
 CanvasRenderer:
@@ -227,7 +227,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &3275197185338332866
+--- !u!114 &1993479515079452317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,14 +236,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5478469864801138951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e55d8257266d084da1dc866e2204976, type: 3}
+  m_Script: {fileID: 11500000, guid: 9871a136abd944a7bab06a705e5d1d96, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Round.DraggableKeyword
-  labelText: {fileID: 7224996725209931784}
-  backgroundImage: {fileID: 5445599453415711097}
-  keywordType: 0
-  personColor: {r: 0.7264151, g: 0.2021627, b: 0.2021627, a: 1}
-  actionColor: {r: 0.23380208, g: 0.6981132, b: 0.23380208, a: 1}
-  objectColor: {r: 0.4, g: 0.4, b: 0.8, a: 1}
-  locationColor: {r: 0.5943396, g: 0.5943396, b: 0.1541919, a: 1}
-  timeColor: {r: 0.6320754, g: 0.18187074, b: 0.6320754, a: 1}
+  m_EditorClassIdentifier: Assembly-CSharp::Round.DraggableWord
+  label: {fileID: 7224996725209931784}
+  canvasGroup: {fileID: 7523255543008402362}
+  background: {fileID: 5445599453415711097}
+  nameColor: {r: 0.17, g: 0.35, b: 0.63, a: 1}
+  professionColor: {r: 0.24, g: 0.55, b: 0.24, a: 1}
+  actionColor: {r: 0.83, g: 0.52, b: 0.06, a: 1}
+  subjectColor: {r: 0.42, g: 0.23, b: 0.55, a: 1}

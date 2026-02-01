@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90239f0d8c64c52954adec4cbd1d50e, type: 3}
   m_Name: Wolf Dialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueSystem.CharacterDialogue
-  characterId: 
-  characterName: 
-  styleSheet: {fileID: 0}
+  characterId: wolf
+  characterName: Wolf
+  styleSheet: {fileID: 11400000, guid: 0eedc03882758bc40b6d7c0732ef0b32, type: 2}
   nodes:
   - id: Wolf.start
     targetId: Wolf.1

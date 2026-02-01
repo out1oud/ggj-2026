@@ -5,7 +5,6 @@ using DialogueSystem;
 using Player;
 using TrafficLight;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Utilities;
 
 namespace Round
@@ -79,7 +78,13 @@ namespace Round
         [Header("UI Hooks (optional)")] [SerializeField]
         bool showDebugLogs = true;
 
-        [Header("Results")] [SerializeField] string resultsSceneName = "Results";
+        [Header("Results")] 
+        [SerializeField] Canvas finalCanvas;
+        [SerializeField] FinalScreenController finalScreenController;
+
+        [Header("Traffic Light")]
+        [Tooltip("Time in seconds for the brake prompt timer at red lights")]
+        [SerializeField] float trafficLightBrakeTimer = 3f;
 
         State _state = State.WaitingForEngineStart;
         int _dialogueIndex;
@@ -176,7 +181,7 @@ namespace Round
         /// <summary>
         /// Called by TrafficLightTrigger when player enters a red light zone.
         /// </summary>
-        public void HandleTrafficLightRed(TrafficLightController trafficLight, float brakeTimerDuration, Action onComplete)
+        public void HandleTrafficLightRed(TrafficLightController trafficLight, Action onComplete)
         {
             if (IsHandlingTrafficLight)
             {
@@ -192,13 +197,13 @@ namespace Round
 
             // Pause the traffic light cycle
             trafficLight.PauseCycle();
-            Log($"Traffic light red detected, pausing cycle. Phase: WaitingForBrake. Timer: {brakeTimerDuration}s");
+            Log($"Traffic light red detected, pausing cycle. Phase: WaitingForBrake. Timer: {trafficLightBrakeTimer}s");
 
             // Start the traffic light handling coroutine
             if (_trafficLightCoroutine != null)
                 StopCoroutine(_trafficLightCoroutine);
             
-            _trafficLightCoroutine = StartCoroutine(TrafficLightSequence(brakeTimerDuration));
+            _trafficLightCoroutine = StartCoroutine(TrafficLightSequence(trafficLightBrakeTimer));
         }
 
         IEnumerator TrafficLightSequence(float brakeTimerDuration)
@@ -407,11 +412,8 @@ namespace Round
             yield return WaitRandom(delayBeforeResultsRange);
 
             _state = State.TransitionToResults;
-            Log("Sequence finished -> Results");
-            if (!string.IsNullOrWhiteSpace(resultsSceneName))
-            {
-                SceneManager.LoadScene(resultsSceneName);
-            }
+            Log("Sequence finished -> Showing Final Screen");
+            ShowFinalScreen();
         }
 
         IEnumerator WaitRandom(Vector2 range)
@@ -462,6 +464,21 @@ namespace Round
             {
                 audioSource.PlayOneShot(engineStopSound);
                 Log($"Playing engine stop sound: {engineStopSound.name}");
+            }
+        }
+
+        void ShowFinalScreen()
+        {
+            Time.timeScale = 0f;
+            
+            if (finalCanvas != null)
+            {
+                finalCanvas.gameObject.SetActive(true);
+                Log("Final canvas activated, time paused");
+            }
+            else
+            {
+                Log("WARNING: Final canvas is not assigned!");
             }
         }
 

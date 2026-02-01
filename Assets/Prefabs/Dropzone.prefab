@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 4530897410220114602}
   - component: {fileID: 5445599453415711097}
   - component: {fileID: 7523255543008402362}
-  - component: {fileID: 485804053349062496}
+  - component: {fileID: 4152411153498736531}
   m_Layer: 5
   m_Name: Dropzone
   m_TagString: Untagged
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 0.392}
+  m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -227,7 +227,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &485804053349062496
+--- !u!114 &4152411153498736531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,14 +236,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5478469864801138951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c2e48e666dc70146b2a49f3ca7e6926, type: 3}
+  m_Script: {fileID: 11500000, guid: baff957c8d794fa1ba70233a2efbe051, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Round.KeywordDropZone
+  m_EditorClassIdentifier: Assembly-CSharp::Round.DropSlot
+  acceptMode: 1
   acceptedType: 0
-  fieldId: 
-  placeholderText: {fileID: 7224996725209931784}
-  borderImage: {fileID: 0}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  highlightColor: {r: 0.5, g: 1, b: 0.5, a: 1}
-  errorColor: {r: 1, g: 0.5, b: 0.5, a: 1}
-  expectedValue: 
+  placeholder: {fileID: 7224996725209931784}
+  defaultPlaceholderText: 
+  background: {fileID: 5445599453415711097}
+  defaultColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
+  nameColor: {r: 0.17, g: 0.35, b: 0.63, a: 1}
+  professionColor: {r: 0.24, g: 0.55, b: 0.24, a: 1}
+  actionColor: {r: 0.83, g: 0.52, b: 0.06, a: 1}
+  subjectColor: {r: 0.42, g: 0.23, b: 0.55, a: 1}

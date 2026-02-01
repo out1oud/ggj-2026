@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47ad87d64fc4b878f6fd276a2036ae9, type: 3}
+  m_Name: Day 1 Sequence
+  m_EditorClassIdentifier: Assembly-CSharp::Round.RoundSequence
+  dialogues:
+  - {fileID: 11400000, guid: f2088ea5be3da8941ab8d93f75d380ad, type: 2}
+  - {fileID: 11400000, guid: 6bcc2503677c1de41bc593047da66755, type: 2}
+  - {fileID: 11400000, guid: 40bd5683813d5e149943c6168703a488, type: 2}
+  - {fileID: 11400000, guid: f6db727c7b01e6144972a12a17d1b013, type: 2}
+  - {fileID: 11400000, guid: 0d2023b954ade0b42bfd6d453f9889c0, type: 2}

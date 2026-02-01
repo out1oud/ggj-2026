@@ -20,7 +20,7 @@ MonoBehaviour:
     targetId: 
     actionType: 0
     actionValue: 0
-    text: -What?
+    text: What?
     answers:
     - id: 
       targetId: crow.2
@@ -88,7 +88,7 @@ MonoBehaviour:
     actionType: 0
     actionValue: 0
     text: 'Funny thing is, I make money doing the dumbest jobs.  Like, no joke, I
-      got two grand recently just for <link=crown.clue3>scratching</link>a windowsill.           
+      got two grand recently just for <link=crown.clue3>scratching</link>a window sill.           
       -Easy money. Someone wants a mark, I leave a mark. '
     answers:
     - id: 

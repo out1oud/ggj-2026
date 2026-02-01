@@ -2225,6 +2225,8 @@ MonoBehaviour:
   redTime: 5
   greenTime: 5
   yellowTime: 2
+  randomizeInitialState: 1
+  randomizePhaseOffset: 1
 --- !u!136 &8118286700487513804
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2247,7 +2249,7 @@ CapsuleCollider:
   m_Radius: 15
   m_Height: 40
   m_Direction: 0
-  m_Center: {x: 9, y: 0, z: 30}
+  m_Center: {x: 9, y: 0, z: 35}
 --- !u!114 &3042275125408471259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2262,7 +2264,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLight.TrafficLightTrigger
   trafficLightController: {fileID: 5936379634635044178}
   playerTag: Player
-  brakeTimerDuration: 1
   showDebugLogs: 1
 --- !u!1 &8749434041021723469
 GameObject:
