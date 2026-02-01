@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Day 1 Sequence
   m_EditorClassIdentifier: Assembly-CSharp::Round.RoundSequence
   dialogues:
+  - {fileID: 11400000, guid: f2088ea5be3da8941ab8d93f75d380ad, type: 2}
   - {fileID: 11400000, guid: f6db727c7b01e6144972a12a17d1b013, type: 2}
-  - {fileID: 11400000, guid: 40bd5683813d5e149943c6168703a488, type: 2}
