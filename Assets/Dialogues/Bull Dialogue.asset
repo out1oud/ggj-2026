@@ -15,4 +15,93 @@ MonoBehaviour:
   characterId: 
   characterName: 
   styleSheet: {fileID: 0}
-  nodes: []
+  nodes:
+  - id: Bull.start
+    targetId: Bull.1
+    actionType: 0
+    actionValue: 0
+    text: I would like to <link=bull.clue1>employ your services</link>, officer.
+      Sensitive information is involved, so I believe we understand each other and
+      this will be handled with a certain discretion.
+    answers: []
+    shouldPause: 0
+  - id: Bull.1
+    targetId: Bull.2
+    actionType: 0
+    actionValue: 0
+    text: "Listen carefully, young man: the stolen object has a tracker, impossible
+      to find with the naked eye. \n\nMy allies are the only ones in the know about
+      it. Chin up! That makes you a part of a very select group of righteous men!"
+    answers: []
+    shouldPause: 0
+  - id: Bull.2
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: "Finding the item and the culprit should not be hard, finding <link=bull.clue2>proof</link>
+      of the transgression - that\u2019s your goal. Whoever did it must be put away
+      for good!"
+    answers:
+    - id: 
+      targetId: Bull.3
+      text: 'Why do you need me? '
+      shouldPause: 0
+    - id: 
+      targetId: Bull.3
+      text: ...
+      shouldPause: 0
+    shouldPause: 0
+  - id: Bull.3
+    targetId: Bull.4
+    actionType: 0
+    actionValue: 0
+    text: "Those bastards. They got my <link=bull.clue2>Big Black Folder</link>.
+      Every gentleman is entitled to his secrets, wouldn\u2019t you agree, young
+      man?\nAnd the bigger the man, the sweeter the smell of the secrets in question."
+    answers: []
+    shouldPause: 1
+  - id: Bull.4
+    targetId: Bull.5
+    actionType: 0
+    actionValue: 0
+    text: 'I have a clue for you already. Whoever it was, surely got out by jumping
+      out the window on the second floor. My <link=bull.clue3>wife</link>, she keeps
+      it open for some reason, whoever it was must have slipped out through there. '
+    answers: []
+    shouldPause: 0
+  - id: Bull.5
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: 'Oh, but they were sloppy - a mark of an unorganised man, a weak man. <link=bull.clue4>Scratches
+      on the window cill.</link> Saw them myself, yes. '
+    answers:
+    - id: 
+      targetId: Bull.6
+      text: I think you already have a suspect, right?
+      shouldPause: 0
+    shouldPause: 0
+  - id: Bull.6
+    targetId: Bull.7
+    actionType: 0
+    actionValue: 0
+    text: "Right\u2026 And he most likely is also wearing a mask during these times,
+      so it may not be so easy to spot him."
+    answers: []
+    shouldPause: 0
+  - id: Bull.7
+    targetId: Bull.8
+    actionType: 0
+    actionValue: 0
+    text: "Some animal is trying to tear my family apart, and I will not stand idly
+      by. I want justice to prevail. \nAnd I want you, as a man of order, to be an
+      accomplice to this"
+    answers: []
+    shouldPause: 0
+  - id: Bull.8
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: Get to it, officer. Goodspeed.
+    answers: []
+    shouldPause: 0
