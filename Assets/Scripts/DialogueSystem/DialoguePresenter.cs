@@ -1,6 +1,8 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using UnityEngine;
 using Utilities;
+using Random = UnityEngine.Random;
 
 namespace DialogueSystem
 {
@@ -22,6 +24,9 @@ namespace DialogueSystem
         DialogueRunner _runner;
         Coroutine _pauseRoutine;
         bool _isRunning;
+        
+        public event Action OnDialogueEnded;
+        public bool IsRunning => _isRunning;
 
         public void StartDialogue(CharacterDialogue dialogue, string startNodeId = null)
         {
@@ -76,6 +81,7 @@ namespace DialogueSystem
         void OnEnd()
         {
             StopDialogue();
+            OnDialogueEnded?.Invoke();
         }
 
         void RenderNode(DialogueNode node)

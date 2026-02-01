@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,6 +24,7 @@ namespace DialogueSystem
 
             if (_dialogue?.nodes == null || _dialogue.nodes.Count == 0)
             {
+                UnityEngine.Debug.LogWarning($"[DialogueRunner] Dialogue '{_dialogue?.name}' has no nodes! Ending immediately.");
                 OnEnd?.Invoke();
                 return;
             }

@@ -8699,6 +8699,8 @@ GameObject:
   - component: {fileID: 2088851079}
   - component: {fileID: 2088851082}
   - component: {fileID: 2088851083}
+  - component: {fileID: 2088851084}
+  - component: {fileID: 2088851085}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -8844,13 +8846,128 @@ MonoBehaviour:
   pauseBeforeNodesRange: {x: 2, y: 5}
   passengerEnterAnimWaitRange: {x: 0.6, y: 1.2}
   passengerExitAnimWaitRange: {x: 0.6, y: 1.2}
-  driveKey: 119
-  stopKey: 115
+  doorOpenDelayRange: {x: 0.3, y: 0.6}
+  doorCloseDelayRange: {x: 0.3, y: 0.5}
+  afterDoorOpenDelayRange: {x: 0.5, y: 1}
+  afterDoorCloseDelayRange: {x: 0.3, y: 0.6}
+  doorOpenSound: {fileID: 8300000, guid: 24dbdf01394d76446bf642fb8a00aa68, type: 3}
+  doorCloseSound: {fileID: 8300000, guid: c8c01add500cc88469a6c0113a7a3211, type: 3}
+  audioSource: {fileID: 2088851084}
+  engineStartSound: {fileID: 8300000, guid: 2e01b15b64190ba41b8f4c128fe9153d, type: 3}
+  engineStopSound: {fileID: 8300000, guid: 32fbc718a5e847742aab67a062dc1d45, type: 3}
+  engineLoopSound: {fileID: 8300000, guid: 56a76370667fddc419ac72db1546c8ed, type: 3}
+  engineAudioSource: {fileID: 2088851084}
+  engineLoopVolume: 0.5
   movementController: {fileID: 2088851078}
   characterActor: {fileID: 2093103928}
   qte: {fileID: 2106567002}
   showDebugLogs: 1
   resultsSceneName: Results
+--- !u!82 &2088851084
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088851075}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!81 &2088851085
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088851075}
+  m_Enabled: 1
 --- !u!1 &2093103923
 GameObject:
   m_ObjectHideFlags: 0
