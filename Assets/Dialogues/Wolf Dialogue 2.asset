@@ -15,4 +15,71 @@ MonoBehaviour:
   characterId: 
   characterName: 
   styleSheet: {fileID: 0}
-  nodes: []
+  nodes:
+  - id: Wolf2.start
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: -Oh! Lucky you again, another night, another dollar, ay?
+    answers:
+    - id: 
+      targetId: Wolf2.1
+      text: Yeah.
+      shouldPause: 0
+    - id: 
+      targetId: Wolf2.1
+      text: ...
+      shouldPause: 0
+    shouldPause: 0
+  - id: Wolf2.1
+    targetId: Wolf2.2
+    actionType: 0
+    actionValue: 0
+    text: Have you seen the self-explanatory mask this big bully wears? I think it's
+      funny.
+    answers: []
+    shouldPause: 0
+  - id: Wolf2.2
+    targetId: Wolf2.3
+    actionType: 0
+    actionValue: 0
+    text: "Who would want a man like that to be in charge? I\u2019ve seen his office.
+      He clearly only cares about himself! I swear on me mum, he has a gigantic portrait
+      of himself in his office! "
+    answers: []
+    shouldPause: 0
+  - id: Wolf2.3
+    targetId: Wolf2.4
+    actionType: 0
+    actionValue: 0
+    text: "You wouldn\u2019t catch me being so self-absorbed. Hah, you wouldn't ever
+      catch me anyway! I used to do all kinds of gymnastics, so i\u2019m quite agile.
+      \nGood trait for a <link=wolf.clue3>lover</link>. Ladies like that, yeah."
+    answers: []
+    shouldPause: 0
+  - id: Wolf2.4
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: "You\u2019re a good listener. Hope not too good, ay?.."
+    answers:
+    - id: 
+      targetId: Wolf2.5
+      text: ...
+      shouldPause: 0
+    shouldPause: 0
+  - id: Wolf2.5
+    targetId: Wolf2.6
+    actionType: 0
+    actionValue: 0
+    text: "Haha, I\u2019m pulling your leg, you\u2019re fine! I\u2019m not staying
+      in this town for long anyway. \n"
+    answers: []
+    shouldPause: 0
+  - id: Wolf2.6
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: Slow down. Yeah, I gotta get off here. Cheers.
+    answers: []
+    shouldPause: 0
