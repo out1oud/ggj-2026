@@ -93,7 +93,7 @@ MonoBehaviour:
     answers:
     - id: 
       targetId: crow.8
-      text: -Do you often leave marks?
+      text: Do you often leave marks?
       shouldPause: 0
     - id: 
       targetId: crow.9
