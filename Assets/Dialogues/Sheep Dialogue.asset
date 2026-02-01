@@ -17,24 +17,44 @@ MonoBehaviour:
   styleSheet: {fileID: 11400000, guid: 4ebe8e943d574a140ad862c7b380801c, type: 2}
   nodes:
   - id: sheep.init
-    targetId: sheep.next
-    actionType: 0
-    actionValue: 0
-    text: Hi, <link=sheep.clue1>Dolly</link>'s speaking.
-    answers:
-    - id: sheep.init.answer1
-      targetId: sheep.next
-      text: Understood
-      shouldPause: 0
-    - id: sheep.init.answer2
-      targetId: sheep.next
-      text: Okay
-      shouldPause: 0
-    shouldPause: 0
-  - id: sheep.next
     targetId: sheep.next2
     actionType: 0
     actionValue: 0
-    text: Hi, <link=sheep.clue1>Dolly</link>'s speaking.
+    text: "\u2026truly unbearable, I say. Oh darlin\u2019, what wouldn\u2019t I give
+      to have such grace! Seein\u2019 those beautiful acrobats last summer has ruined
+      me, since then I feel like a stumbling toddler!"
+    answers: []
+    shouldPause: 0
+  - id: sheep.next2
+    targetId: sheep.next3
+    actionType: 0
+    actionValue: 0
+    text: "Oh, you know my <link=sheep.clue2>hubby</link>. He doesn\u2019t have the
+      time for such frivolities as complimenting his <link=sheep.clue3>wife</link>
+      to make her feel better. "
+    answers: []
+    shouldPause: 0
+  - id: sheep.next3
+    targetId: sheep.next4
+    actionType: 0
+    actionValue: 0
+    text: "Always buried in his <link=sheep.clue4>Little Folders</link>, always grumblin\u2019
+      and fumblin\u2019, the oaf! Oh, how I wish for a change! I do, I truly do!"
+    answers: []
+    shouldPause: 0
+  - id: sheep.next4
+    targetId: sheep.next5
+    actionType: 0
+    actionValue: 0
+    text: "Plans for the evening? Hah! I feel poetic today, so probably starin\u2019
+      out my window till I fall asleep. Like Juliette and Rapunzel, I\u2019m destined
+      to just starin\u2019 out my golden cage. "
+    answers: []
+    shouldPause: 0
+  - id: sheep.next4
+    targetId: sheep.next5
+    actionType: 0
+    actionValue: 0
+    text: 
     answers: []
     shouldPause: 0
