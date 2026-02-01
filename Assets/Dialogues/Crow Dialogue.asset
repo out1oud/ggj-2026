@@ -17,31 +17,103 @@ MonoBehaviour:
   styleSheet: {fileID: 11400000, guid: 07711bb557e7e9d469e4127f0520c535, type: 2}
   nodes:
   - id: crow.start
-    targetId: crow.long_night
+    targetId: 
     actionType: 0
     actionValue: 0
-    text: Hey! Name's <link=crow.name>Edward</link>.
-    answers: []
-    shouldPause: 1
-  - id: crow.long_night
-    targetId: crow.pause
-    actionType: 0
-    actionValue: 0
-    text: Long night, huh?
+    text: -What?
     answers:
-    - id: crow.long_night.what
-      targetId: crow.business
-      text: What makes you say that?
+    - id: 
+      targetId: crow.2
+      text: -What?
       shouldPause: 0
-    - id: crow.long_night.not
-      targetId: crow.business
-      text: Not really...
-      shouldPause: 1
-    shouldPause: 0
-  - id: crow.business
-    targetId: crow.pause
+    - id: 
+      targetId: crow.2
+      text: ...
+      shouldPause: 0
+    shouldPause: 1
+  - id: crow.2
+    targetId: 
     actionType: 0
     actionValue: 0
-    text: Just... many <link=crow.thing>things</link> to do.
+    text: -What are you looking at me like this for?
+    answers:
+    - id: 
+      targetId: crow.3
+      text: Like what?
+      shouldPause: 0
+    shouldPause: 0
+  - id: crow.3
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: "Like I\u2019m kind of a big deal here. \n\nActually I kinda am. People
+      in my field of work know my name.\n"
+    answers:
+    - id: 
+      targetId: crow.4
+      text: And what is your name?
+      shouldPause: 0
+    - id: 
+      targetId: crow.5
+      text: ...
+      shouldPause: 0
+    shouldPause: 0
+  - id: crow.4
+    targetId: crow.5
+    actionType: 0
+    actionValue: 0
+    text: "If you don't know already, you\u2019re not supposed to know at all\u2026"
     answers: []
     shouldPause: 1
+  - id: crow.5
+    targetId: crow.6
+    actionType: 0
+    actionValue: 0
+    text: "Its enough for strangers to know - I\u2019m a <link=crown.clue1>contractor</link>.
+      Hired work. \nOff the record."
+    answers: []
+    shouldPause: 1
+  - id: crow.6
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: "You know, Im aware how to track things. And people. The right ones. I
+      have the tools for the <link=crown.clue2>job</link>, so to speak.\n\n\nBut
+      I\u2019m not really supposed to talk about that. So let\u2019s say: you get
+      what you get."
+    answers: []
+    shouldPause: 0
+  - id: crow.7
+    targetId: 
+    actionType: 0
+    actionValue: 0
+    text: 'Funny thing is, I make money doing the dumbest jobs.  Like, no joke, I
+      got two grand recently just for <link=crown.clue3>scratching</link>a windowsill.           
+      -Easy money. Someone wants a mark, I leave a mark. '
+    answers:
+    - id: 
+      targetId: crow.8
+      text: -Do you often leave marks?
+      shouldPause: 0
+    - id: 
+      targetId: crow.9
+      text: ...
+      shouldPause: 0
+    shouldPause: 0
+  - id: crow.8
+    targetId: crow.9
+    actionType: 0
+    actionValue: 0
+    text: "Listen, man. There are scary people in this world. I\u2019ve sinned plenty
+      in my life, so I\u2019m not afraid \u2014 fists, boots, guns, whatever you
+      want. But it\u2019s different when you run into a real monster. The kind that\u2019ll
+      bash you to death with a <link=crown.clue4>Big Black Folder</link>. "
+    answers: []
+    shouldPause: 0
+  - id: crow.8
+    targetId: crow.9
+    actionType: 0
+    actionValue: 0
+    text: "That\u2019s far enough. Thanks, bye."
+    answers: []
+    shouldPause: 0
