@@ -20,7 +20,7 @@ MonoBehaviour:
     targetId: 
     actionType: 0
     actionValue: 0
-    text: -What?
+    text: What?
     answers:
     - id: 
       targetId: crow.2
@@ -69,7 +69,7 @@ MonoBehaviour:
     targetId: crow.6
     actionType: 0
     actionValue: 0
-    text: "Its enough for strangers to know - I\u2019m a <link=crown.clue1>contractor</link>.
+    text: "It's enough for strangers to know - I\u2019m a <link=crown.clue1>contractor</link>.
       Hired work. \nOff the record."
     answers: []
     shouldPause: 1
@@ -89,7 +89,7 @@ MonoBehaviour:
     actionValue: 0
     text: 'Funny thing is, I make money doing the dumbest jobs.  Like, no joke, I
       got two grand recently just for <link=crown.clue3>scratching</link>a windowsill.           
-      -Easy money. Someone wants a mark, I leave a mark. '
+      Easy money. Someone wants a mark, I leave a mark. '
     answers:
     - id: 
       targetId: crow.8

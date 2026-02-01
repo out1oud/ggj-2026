@@ -82,7 +82,6 @@ MonoBehaviour:
     targetId: 
     actionType: 0
     actionValue: 0
-    text: "I have arrived, I have to go. Yes, I\u2019ll talk to you later. Toodles!
-      *puts phone away*"
+    text: "I have arrived, I have to go. Yes, I\u2019ll talk to you later. Toodles!"
     answers: []
     shouldPause: 0

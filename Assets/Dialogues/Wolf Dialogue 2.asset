@@ -20,7 +20,7 @@ MonoBehaviour:
     targetId: 
     actionType: 0
     actionValue: 0
-    text: -Oh! Lucky you again, another night, another dollar, ay?
+    text: Oh! Lucky you again, another night, another dollar, ay?
     answers:
     - id: 
       targetId: Wolf2.1
