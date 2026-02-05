@@ -74,7 +74,7 @@ MonoBehaviour:
     answers: []
     shouldPause: 1
   - id: crow.6
-    targetId: 
+    targetId: crow.7
     actionType: 0
     actionValue: 0
     text: "You know, Im aware how to track things. And people. The right ones. I
@@ -88,8 +88,8 @@ MonoBehaviour:
     actionType: 0
     actionValue: 0
     text: 'Funny thing is, I make money doing the dumbest jobs.  Like, no joke, I
-      got two grand recently just for <link=crown.clue3>scratching</link>a window sill.           
-      Easy money. Someone wants a mark, I leave a mark. '
+      got two grand recently just for <link=crown.clue3>scratching</link>a window
+      sill.            Easy money. Someone wants a mark, I leave a mark. '
     answers:
     - id: 
       targetId: crow.8
