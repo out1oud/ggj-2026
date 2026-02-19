@@ -14,21 +14,25 @@ namespace Round
         [Header("Data")]
         [Tooltip("Source for extracting words (used by editor button)")]
         [SerializeField] RoundSequence roundSequence;
-        
+
         [SerializeField] List<WordEntry> words = new();
 
-        [Header("UI")] 
+        [Header("UI")]
         [SerializeField] WordBank wordBank;
-        
+
+        [Header("Phases")]
+        [SerializeField] GameObject portraitPhaseRoot;
+        [SerializeField] GameObject textPhaseRoot;
+
         [Header("Check Button")]
         [SerializeField] Button checkButton;
-        
+
         [Header("Error Popup")]
         [SerializeField] GameObject errorPopup;
         [SerializeField] Button errorCloseButton;
         [SerializeField] TMP_Text errorText;
         [SerializeField] string errorMessage = "Некоторые ответы неверны. Попробуйте ещё раз!";
-        
+
         [Header("Success Popup")]
         [SerializeField] GameObject successPopup;
         [SerializeField] Button restartButton;
@@ -37,6 +41,9 @@ namespace Round
         [SerializeField] string cluesFormat = "Собрано улик: {0}/{1}";
         [SerializeField] string trafficLightsFormat = "Светофоры: {0}/{1}";
         
+        enum Phase { Portraits, Text }
+        Phase _currentPhase;
+
         // Exposed for editor script
         public RoundSequence RoundSequence => roundSequence;
         public List<WordEntry> Words { get => words; set => words = value; }
@@ -69,31 +76,25 @@ namespace Round
         void Start()
         {
             wordBank.Build(words);
-            
-            // Setup check button
+
+            _currentPhase = Phase.Portraits;
+            if (portraitPhaseRoot) portraitPhaseRoot.SetActive(true);
+            if (textPhaseRoot) textPhaseRoot.SetActive(false);
+
             if (checkButton)
             {
                 checkButton.onClick.AddListener(OnCheckButtonClicked);
                 checkButton.interactable = false;
-                Debug.Log("[FinalScreen] Check button initialized");
             }
-            else
-            {
-                Debug.LogWarning("[FinalScreen] Check button is not assigned!");
-            }
-            
-            // Setup popup buttons
+
             if (errorCloseButton)
                 errorCloseButton.onClick.AddListener(HideErrorPopup);
-            
+
             if (restartButton)
                 restartButton.onClick.AddListener(OnRestartClicked);
-            
-            // Hide popups initially
+
             if (errorPopup) errorPopup.SetActive(false);
             if (successPopup) successPopup.SetActive(false);
-            
-            Debug.Log($"[FinalScreen] Slots: {professionSlots.Count} profession, {textSlots.Count} text");
         }
 
         void Update()
@@ -112,28 +113,34 @@ namespace Round
 
         void OnCheckButtonClicked()
         {
-            Debug.Log("[FinalScreen] Check button clicked!");
-            
-            if (!IsComplete())
+            if (!IsComplete()) return;
+
+            if (_currentPhase == Phase.Portraits)
             {
-                Debug.Log("[FinalScreen] Not complete, ignoring click");
-                return;
-            }
-            
-            // Log what we're checking
-            Debug.Log($"[FinalScreen] Checking: {professionSlots.Count} profession slots, {textSlots.Count} text slots");
-            Debug.Log($"[FinalScreen] Correct answers defined: {correctProfessionAnswers.Count} profession, {correctTextAnswers.Count} text");
-            
-            bool allCorrect = CheckAllCorrect();
-            Debug.Log($"[FinalScreen] All correct: {allCorrect}");
-            
-            if (allCorrect)
-            {
-                ShowSuccessPopup();
+                HighlightCorrectSlots(professionSlots, correctProfessionAnswers);
+
+                if (!CheckProfessionAnswers())
+                {
+                    ShowErrorPopup();
+                    return;
+                }
+
+                // Все верно — переходим к текстовому этапу
+                if (portraitPhaseRoot) portraitPhaseRoot.SetActive(false);
+                if (textPhaseRoot) textPhaseRoot.SetActive(true);
+                _currentPhase = Phase.Text;
             }
             else
             {
-                ShowErrorPopup();
+                HighlightCorrectSlots(textSlots, correctTextAnswers);
+
+                if (!CheckTextAnswers())
+                {
+                    ShowErrorPopup();
+                    return;
+                }
+
+                ShowSuccessPopup();
             }
         }
 
@@ -198,13 +205,20 @@ namespace Round
 
         public bool IsComplete()
         {
-            // Must have at least some slots to be considered complete
-            if (professionSlots.Count == 0 && textSlots.Count == 0)
-                return false;
-            
-            bool portraitsOk = professionSlots.All(s => s.GetWord() != null);
-            bool textOk = textSlots.All(s => s.GetWord() != null);
-            return portraitsOk && textOk;
+            if (_currentPhase == Phase.Portraits)
+                return professionSlots.Count > 0 && professionSlots.All(s => s.GetWord() != null);
+
+            return textSlots.Count > 0 && textSlots.All(s => s.GetWord() != null);
+        }
+
+        void HighlightCorrectSlots(List<DropSlot> slots, List<string> correctAnswers)
+        {
+            for (int i = 0; i < slots.Count; i++)
+            {
+                string correct = i < correctAnswers.Count ? correctAnswers[i] : null;
+                if (IsSlotCorrect(slots[i], correct))
+                    slots[i].SetCorrectHighlight();
+            }
         }
 
         public FinalScreenResult CollectResult()

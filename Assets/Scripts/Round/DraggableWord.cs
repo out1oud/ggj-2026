@@ -17,7 +17,7 @@ public class DraggableWord : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     [Header("Colors by Type")]
     [SerializeField] Color nameColor = new(0.17f, 0.35f, 0.63f);       // #2C5AA0
-    [SerializeField] Color professionColor = new(0.24f, 0.55f, 0.24f); // #3D8B3D
+    [SerializeField] Color professionColor = new(0.13f, 0.46f, 0.71f); // #2175B5
     [SerializeField] Color actionColor = new(0.83f, 0.52f, 0.06f);     // #D4850F
     [SerializeField] Color subjectColor = new(0.42f, 0.23f, 0.55f);    // #6B3A8C
 

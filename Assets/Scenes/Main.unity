@@ -2575,7 +2575,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -2680,18 +2680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b84ded53eaddf4b98f88d5a619a482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Round.ResultScreenController
-  keywordPaletteContainer: {fileID: 1353828593}
-  dropZonesContainer: {fileID: 0}
-  keywordPrefab: {fileID: 3275197185338332866, guid: 7a59edc7045493a49878e55b7f06c556, type: 3}
-  dropZonePrefab: {fileID: 485804053349062496, guid: ec980bd552b4ba74fb1384cb502e14f6, type: 3}
-  submitButton: {fileID: 0}
-  resetButton: {fileID: 0}
-  resultText: {fileID: 0}
-  canvasGroup: {fileID: 0}
-  availableKeywords:
-  - value: test
-    type: 0
-  fields: []
 --- !u!114 &600026488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2761,6 +2749,8 @@ MonoBehaviour:
     title: scratches on the window sill
     type: 3
   wordBank: {fileID: 600026488}
+  portraitPhaseRoot: {fileID: 1257622599}
+  textPhaseRoot: {fileID: 415872345}
   checkButton: {fileID: 494731175}
   errorPopup: {fileID: 1968440758}
   errorCloseButton: {fileID: 1241301047}
@@ -3603,7 +3593,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -8477,7 +8467,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96

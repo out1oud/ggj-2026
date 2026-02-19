@@ -10,11 +10,6 @@ namespace DialogueSystem
     {
         [Header("UI")] [SerializeField] DialogueUIController ui;
 
-        [Header("Text auto-hide (only text)")] [SerializeField]
-        float textHideDuration = 0.6f;
-
-        [SerializeField] AnimationCurve textHideCurve = AnimationCurve.EaseInOut(0, 1, 1, 0);
-
         [Header("Pause (node/answer shouldPause)")] [SerializeField]
         float pauseMin = 0.3f;
 
@@ -102,9 +97,13 @@ namespace DialogueSystem
                 case true:
                     ui.ShowText(node.text);
                     ui.HideAnswersInstant();
-
-                    ui.FadeOutTextPanel(textHideDuration, textHideCurve, () => { StartPauseThenGoTo(node.targetId, !node.shouldPause); });
-
+                    ui.ShowNext(() =>
+                    {
+                        if (!_isRunning) return;
+                        ui.HideNextInstant();
+                        ui.HideTextInstant();
+                        _runner?.GoTo(node.targetId);
+                    });
                     return;
                 default:
                     ui.HideAllInstant();

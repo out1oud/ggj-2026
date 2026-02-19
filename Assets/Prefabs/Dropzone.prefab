@@ -246,6 +246,6 @@ MonoBehaviour:
   background: {fileID: 5445599453415711097}
   defaultColor: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
   nameColor: {r: 0.17, g: 0.35, b: 0.63, a: 1}
-  professionColor: {r: 0.24, g: 0.55, b: 0.24, a: 1}
+  professionColor: {r: 0.13, g: 0.46, b: 0.71, a: 1}
   actionColor: {r: 0.83, g: 0.52, b: 0.06, a: 1}
   subjectColor: {r: 0.42, g: 0.23, b: 0.55, a: 1}

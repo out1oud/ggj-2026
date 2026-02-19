@@ -71,6 +71,19 @@ namespace DialogueSystem
             ClearAnswers();
         }
 
+        public void ShowNext(Action onClick)
+        {
+            SetVisible(answersPanel, true);
+            ClearAnswers();
+
+            Button btn = Instantiate(answerButtonPrefab, answersContainer);
+            var tmp = btn.GetComponentInChildren<TMP_Text>();
+            if (tmp) tmp.SetText("→");
+            btn.onClick.AddListener(() => onClick?.Invoke());
+        }
+
+        public void HideNextInstant() => HideAnswersInstant();
+
         public void HideAllInstant()
         {
             HideTextInstant();
