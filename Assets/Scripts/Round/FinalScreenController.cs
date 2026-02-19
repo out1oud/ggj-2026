@@ -126,7 +126,6 @@ namespace Round
                 }
 
                 // Все верно — переходим к текстовому этапу
-                if (portraitPhaseRoot) portraitPhaseRoot.SetActive(false);
                 if (textPhaseRoot) textPhaseRoot.SetActive(true);
                 _currentPhase = Phase.Text;
             }
